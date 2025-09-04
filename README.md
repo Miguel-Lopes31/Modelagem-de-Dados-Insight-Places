@@ -5,13 +5,38 @@ Projeto de modelagem para um sistema de **hospedagens e aluguéis**, incluindo p
 ---
 
 ## 🔎 Visão Geral
+## 🗂 Estrutura da Base de Dados
 
-* **Proprietários** disponibilizam **hospedagens** para aluguel.
-* Cada **hospedagem** tem um **endereço** e pertence a um **proprietário**.
-* **Clientes** realizam **aluguéis** em hospedagens.
-* Após a estadia, **clientes** podem registrar **avaliações** (nota e comentário).
+### 🧑‍💼 Proprietários (`proprietarios`)
+- Armazena as informações dos **donos das hospedagens**.  
+- Cada proprietário tem um **ID único**, nome, CPF ou CNPJ e informações de contato.  
+- É a base de quem disponibiliza os imóveis para aluguel.  
 
-🔗 **Relacionamentos**
+### 👤 Clientes (`clientes`)
+- Representa as pessoas que alugam as hospedagens.  
+- Cada cliente também tem um **ID único**, nome, CPF e contato.  
+- É quem efetivamente faz as reservas.  
+
+### 📍 Endereços (`enderecos`)
+- Guarda os dados de localização: rua, número, bairro, cidade, estado e CEP.  
+- Serve para identificar onde cada hospedagem está situada.  
+
+### 🏠 Hospedagens (`hospedagens`)
+- São os imóveis disponíveis para aluguel (**casa, apartamento, pousada, etc.**).  
+- Cada hospedagem tem um **tipo**, está associada a um **endereço** e a um **proprietário**.  
+- Possui um campo que indica se está **ativa ou não** para aluguel.  
+
+### 📑 Aluguéis (`alugueis`)
+- Registra os **contratos de locação**.  
+- Conecta **clientes** com **hospedagens**.  
+- Armazena **datas de início e fim** da hospedagem e o **preço total do aluguel**.  
+
+### ⭐ Avaliações (`avaliacoes`)
+- Após a estadia, o cliente pode avaliar a hospedagem.  
+- Inclui uma **nota** (ex.: de 1 a 5 estrelas) e um **comentário**.  
+- Relaciona diretamente **clientes** e **hospedagens**.  
+
+## 🔗 **Relacionamentos**
 
 Um proprietário pode ter várias hospedagens (1:N).
 
@@ -83,38 +108,6 @@ Após criar as tabelas, execute os scripts de carga **nesta ordem**:
 6. `6-avaliacoes.sql`
 
 > A ordem garante que as **chaves estrangeiras** encontrem os registros de referência já existentes.
-
----
-
-## 🧱 Tabelas e relacionamentos (resumo)
-
-* **proprietarios** (`proprietario_id`, `nome`, `cpf_cnpj`, `contato`)
-
-  * Donos das hospedagens.
-* **clientes** (`cliente_id`, `nome`, `cpf`, `contato`)
-
-  * Pessoas que alugam as hospedagens.
-* **enderecos** (`endereco_id`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `cep`)
-
-  * Localização de cada hospedagem.
-* **hospedagens** (`hospedagem_id`, `tipo`, `endereco_id*`, `proprietario_id*`, `ativo`)
-
-  * Imóveis disponíveis; liga a um **endereço** e a um **proprietário**.
-* **alugueis** (`aluguel_id`, `cliente_id*`, `hospedagem_id*`, `data_inicio`, `data_fim`, `preco_total`)
-
-  * Registros de locação; conectam **clientes** e **hospedagens**.
-* **avaliacoes** (`avaliacao_id`, `cliente_id*`, `hospedagem_id*`, `nota`, `comentario`)
-
-  * Feedback dos clientes após a estadia.
-
-`*` Campos com **chave estrangeira** que asseguram integridade referencial.
-
-**Cardinalidades principais**
-
-* Um **proprietário** → muitas **hospedagens** (1\:N)
-* Um **endereço** → uma **hospedagem** (1:1 no contexto atual)
-* Um **cliente** → muitos **aluguéis** (1\:N)
-* Um **cliente** → muitas **avaliações** (1\:N); cada avaliação pertence a **uma hospedagem**.
 
 ---
 
