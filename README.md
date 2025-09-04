@@ -36,18 +36,15 @@ Projeto de modelagem para um sistema de **hospedagens e aluguéis**, incluindo p
 - Inclui uma **nota** (ex.: de 1 a 5 estrelas) e um **comentário**.  
 - Relaciona diretamente **clientes** e **hospedagens**.  
 
-## 🔗 **Relacionamentos**
+## 🔗 Relacionamentos do Modelo
 
-Um proprietário pode ter várias hospedagens (1:N).
+- 🧑‍💼 **Um proprietário** pode ter **várias hospedagens** → (1:N)  
+- 🏠 **Uma hospedagem** está vinculada a **um endereço** e a **um proprietário** → (N:1)  
+- 👤 **Um cliente** pode fazer **vários aluguéis**, e cada aluguel pertence a apenas **uma hospedagem** → (1:N)  
+- ⭐ **Um cliente** pode deixar **várias avaliações**, sempre relacionadas a **uma hospedagem específica** → (1:N)  
 
-Uma hospedagem está vinculada a um endereço e a um proprietário (N:1).
-
-Um cliente pode fazer vários aluguéis (1:N), e cada aluguel pertence a apenas uma hospedagem.
-
-Um cliente também pode deixar várias avaliações, sempre relacionadas a uma hospedagem específica.
-
-Esse modelo garante integridade dos dados, já que os IDs únicos e as chaves estrangeiras controlam os vínculos entre tabelas. Assim, conseguimos organizar as informações sem duplicações desnecessárias.
-
+⚖️ Esse modelo garante **integridade dos dados**, já que os **IDs únicos** e as **chaves estrangeiras** controlam os vínculos entre tabelas.  
+Dessa forma, conseguimos manter as informações **organizadas, consistentes e sem duplicações desnecessárias**.  
 ---
 
 ## 🧭 Diagrama ER
